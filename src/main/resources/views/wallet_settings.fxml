@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.controllers.WalletController">
+    <center>
+        <VBox alignment="CENTER" spacing="10">
+            <Label text="Paramètres du portefeuille" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+            <Button text="Changer le mot de passe" onAction="#handleChangePassword" />
+            <Button text="Afficher la clé privée" onAction="#handleShowPrivateKey" />
+            <Button text="Retour" onAction="#handleBackToMain" />
+        </VBox>
+    </center>
+</BorderPane>

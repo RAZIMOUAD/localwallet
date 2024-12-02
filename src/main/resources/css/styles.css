@@ -1,0 +1,103 @@
+/* Styles globaux */
+.root {
+    -fx-font-family: "Roboto", sans-serif;
+    -fx-background-color: linear-gradient(to bottom, #0F2027, #203A43, #2C5364);
+    -fx-padding: 20px;
+}
+
+/* En-têtes */
+.header-label {
+    -fx-text-fill: #FFD700; /* Doré pour une apparence premium */
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+    -fx-text-alignment: center;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0.5, 0, 2);
+}
+
+/* Conteneur principal */
+.main-container {
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+    -fx-padding: 30px;
+    -fx-border-radius: 15px;
+    -fx-background-radius: 15px;
+    -fx-border-color: #FFD700;
+    -fx-border-width: 2px;
+}
+
+/* Champs de texte */
+.text-field, .password-field {
+    -fx-background-color: #FAFAFA;
+    -fx-border-color: #FFD700;
+    -fx-border-radius: 8px;
+    -fx-padding: 12px;
+    -fx-font-size: 14px;
+    -fx-min-width: 300px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0.5, 0, 2);
+}
+
+.text-field:focused, .password-field:focused {
+    -fx-border-color: #00C851;
+    -fx-background-color: #FFFFFF;
+}
+
+/* Boutons */
+.primary-button {
+    -fx-background-color: linear-gradient(to right, #FFD700, #FFC107);
+    -fx-text-fill: #141E30;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 12px 25px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+    -fx-min-width: 130px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 5, 0.5, 0, 2);
+}
+
+.primary-button:hover {
+    -fx-background-color: #FFC107;
+}
+
+.secondary-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #FFD700;
+    -fx-font-size: 14px;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-border-color: #FFD700;
+    -fx-border-width: 2px;
+    -fx-cursor: hand;
+}
+
+.secondary-button:hover {
+    -fx-background-color: rgba(255, 215, 0, 0.15);
+}
+
+/* Feedback ou erreurs */
+.feedback-label {
+    -fx-text-fill: #FF6B6B;
+    -fx-font-size: 14px;
+    -fx-font-style: italic;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(255, 0, 0, 0.3), 5, 0.5, 0, 2);
+}
+
+/* Styles des boîtes */
+.box {
+    -fx-spacing: 20px;
+    -fx-alignment: center;
+    -fx-padding: 10px;
+}
+
+/* Animation légère pour transitions */
+.button:focused {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 10, 0.2, 0, 4);
+}
+
+/* Animation pour les hover */
+.button:hover {
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.4, 0, 2);
+}

@@ -1,0 +1,27 @@
+src/
+└── main/
+├── java/
+│   ├── app/
+│   │   ├── Main.java                  (Point d’entrée de l’application)
+│   │   ├── config/                    (Configuration globale)
+│   │   │   └── AppConfig.java
+│   │   ├── controllers/               (Contrôleurs UI et API)
+│   │   │   ├── AuthController.java    (Gestion de l'authentification)
+│   │   │   ├── MainController.java
+│   │   │   ├── WalletController.java
+│   │   └── services/                  (Logique métier)
+│   │       ├── BitcoinService.java    (Gestion Bitcoin)
+│   │       ├── AuthService.java       (Gestion des sessions/mots de passe)
+│   │       └── LightningService.java
+│   │   └── utils/                     (Utilitaires communs)
+│   │       ├── CryptoUtils.java       (Chiffrement et 2FA)
+│   │       └── QRCodeUtils.java
+│   │   └── views/                     (Templates FXML pour l’UI)
+│   │       ├── login.fxml             (Écran de connexion)
+│   │       ├── main.fxml              (Interface principale)
+│   │       ├── send_money.fxml        (Écran d’envoi de fonds)
+│   │       └── wallet_settings.fxml   (Paramètres du portefeuille)
+└── resources/
+├── css/                           (Styles CSS)
+├── images/                        (Images UI)
+└── fxml/                          (Templates FXML)

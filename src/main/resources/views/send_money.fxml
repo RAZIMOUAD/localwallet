@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.controllers.WalletController">
+    <center>
+        <VBox alignment="CENTER" spacing="10">
+            <Label text="Envoyer des fonds" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+            <TextField fx:id="recipientAddressField" promptText="Adresse du destinataire" />
+            <TextField fx:id="amountField" promptText="Montant en BTC" />
+            <Button text="Envoyer" onAction="#sendMoney" />
+            <Label fx:id="statusLabel" textFill="green" visible="false" />
+        </VBox>
+    </center>
+</BorderPane>

@@ -29,16 +29,15 @@ public class AuthController {
         String password = passwordField.getText();
 
         if (authService.authenticate(username, password)) {
-            feedbackText.setText("Connexion réussie !");
+            feedbackText.setText("Login successful!");
             feedbackText.setStyle("-fx-fill: green;");
-
-            // Charger l'écran principal après connexion
-            Main.loadScene("/views/main.fxml");
+            Main.loadScene("/views/main.fxml"); // Load the main screen
         } else {
-            feedbackText.setText("Identifiants invalides. Réessayez.");
+            feedbackText.setText("Invalid credentials. Please try again.");
             feedbackText.setStyle("-fx-fill: red;");
         }
     }
+
 
     @FXML
     public void goToRegister(ActionEvent event) {

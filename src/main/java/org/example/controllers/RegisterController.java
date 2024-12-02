@@ -31,16 +31,16 @@ public class RegisterController {
         String confirmPassword = confirmPasswordField.getText();
 
         if (!password.equals(confirmPassword)) {
-            feedbackText.setText("Les mots de passe ne correspondent pas.");
+            feedbackText.setText("Passwords do not match.");
             feedbackText.setStyle("-fx-fill: red;");
             return;
         }
 
         if (authService.register(username, password)) {
-            feedbackText.setText("Inscription réussie !");
+            feedbackText.setText("Registration successful!");
             feedbackText.setStyle("-fx-fill: green;");
         } else {
-            feedbackText.setText("Nom d'utilisateur déjà pris.");
+            feedbackText.setText("Username is already taken or an error occurred.");
             feedbackText.setStyle("-fx-fill: red;");
         }
     }

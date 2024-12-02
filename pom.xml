@@ -22,6 +22,7 @@
             <artifactId>javafx-controls</artifactId>
             <version>21</version>
         </dependency>
+
         <!-- JavaFX FXML -->
         <dependency>
             <groupId>org.openjfx</groupId>
@@ -29,7 +30,7 @@
             <version>21</version>
         </dependency>
 
-        <!-- ZXing JavaSE pour QR Code avec JavaFX -->
+        <!-- ZXing JavaSE for QR Code with JavaFX -->
         <dependency>
             <groupId>com.google.zxing</groupId>
             <artifactId>core</artifactId>
@@ -41,17 +42,15 @@
             <version>3.5.1</version>
         </dependency>
 
+        <!-- MySQL Connector -->
         <dependency>
-            <groupId>com.mysql</groupId>
-            <artifactId>mysql-connector-j</artifactId>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.33</version>
             <scope>runtime</scope>
         </dependency>
-
-
-
-
-
     </dependencies>
+
 
     <build>
 

@@ -7,7 +7,7 @@
     <top>
         <MenuBar>
             <Menu text="Fichier">
-                <MenuItem text="Déconnexion" onAction="#handleLogout" />
+                <MenuItem text="Déconnexion" onAction="#logout" />
                 <MenuItem text="Quitter" onAction="#handleExit" />
             </Menu>
             <Menu text="Portefeuille">

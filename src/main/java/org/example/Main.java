@@ -6,27 +6,34 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.net.URL;
+import java.io.IOException;
 
 public class Main extends Application {
 
+    private static Stage primaryStage;
+
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader();
-        URL fxmlFile = getClass().getResource("/views/login.fxml");
-        loader.setLocation(fxmlFile);
-        Parent root = loader.load();
-
-        // Créer une scène et y ajouter le fichier CSS
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
-
-        // Configurer la fenêtre principale
+    public void start(Stage stage) throws Exception {
+        primaryStage = stage;
+        loadScene("/views/login.fxml"); // Initialiser avec l'écran de connexion
         primaryStage.setTitle("LocalWallet");
-        primaryStage.setScene(scene);
         primaryStage.show();
     }
 
+    public static void loadScene(String fxmlFilePath) {
+        try {
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource(fxmlFilePath));
+            Parent root = loader.load();
+
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(Main.class.getResource("/css/styles.css").toExternalForm());
+            primaryStage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Erreur lors du chargement de la scène : " + fxmlFilePath);
+        }
+    }
+   
     public static void main(String[] args) {
         launch(args);
     }

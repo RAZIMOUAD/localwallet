@@ -3,6 +3,8 @@ package org.example.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import org.example.Main;
+import org.example.services.AuthService;
 import org.example.services.BitcoinService;
 
 public class MainController {
@@ -23,10 +25,16 @@ public class MainController {
     }
 
     @FXML
-    public void handleLogout(ActionEvent event) {
-        // Ajoutez votre logique pour la déconnexion
-        System.out.println("Déconnexion effectuée !");
+    public void logout(ActionEvent event) {
+        // Appeler le service de déconnexion
+        AuthService authService = new AuthService();
+        authService.logout();
+
+        // Charger l'écran de connexion
+        Main.loadScene("/views/login.fxml");
+
     }
+
 
     @FXML
     public void handleExit(ActionEvent event) {

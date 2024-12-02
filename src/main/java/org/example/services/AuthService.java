@@ -1,29 +1,52 @@
 package org.example.services;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import org.example.utils.DatabaseUtils;
 
 public class AuthService {
 
-    private final Map<String, String> userDatabase = new HashMap<>();
     private boolean isAuthenticated = false;
 
-    public AuthService() {
-        // Initialiser un utilisateur de démonstration
-        userDatabase.put("admin", "password123");
+    /**
+     * Authentifie un utilisateur en vérifiant les informations dans la base de données.
+     */
+    public boolean authenticate(String username, String password) {
+        String query = "SELECT password_hash FROM users WHERE username = ?";
+        try (Connection connection = DatabaseUtils.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(query)) {
+
+            stmt.setString(1, username);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    String storedPassword = rs.getString("password_hash");
+                    isAuthenticated = storedPassword.equals(password); // Remplacez par un hachage sécurisé (ex: BCrypt)
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return isAuthenticated;
     }
 
     /**
-     * Vérifie les informations d'identification de l'utilisateur.
+     * Inscrit un nouvel utilisateur dans la base de données.
      */
-    public boolean authenticate(String username, String password) {
-        String storedPassword = userDatabase.get(username);
-        isAuthenticated = storedPassword != null && storedPassword.equals(password);
-        return isAuthenticated;
+    public boolean register(String username, String password) {
+        String query = "INSERT INTO users (username, password_hash) VALUES (?, ?)";
+        try (Connection connection = DatabaseUtils.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(query)) {
+
+            stmt.setString(1, username);
+            stmt.setString(2, password); // Remplacez par un hachage sécurisé
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false; // L'inscription a échoué
+        }
     }
 
     /**
@@ -38,12 +61,5 @@ public class AuthService {
      */
     public boolean isAuthenticated() {
         return isAuthenticated;
-    }
-    public boolean register(String username, String password) {
-        if (userDatabase.containsKey(username)) {
-            return false; // L'utilisateur existe déjà
-        }
-        userDatabase.put(username, password);
-        return true; // Inscription réussie
     }
 }

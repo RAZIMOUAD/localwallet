@@ -28,12 +28,7 @@
             <artifactId>javafx-fxml</artifactId>
             <version>21</version>
         </dependency>
-        <!-- ZXing Core pour QR Code -->
-        <dependency>
-            <groupId>com.google.zxing</groupId>
-            <artifactId>core</artifactId>
-            <version>3.4.1</version>
-        </dependency>
+
         <!-- ZXing JavaSE pour QR Code avec JavaFX -->
         <dependency>
             <groupId>com.google.zxing</groupId>
@@ -45,6 +40,15 @@
             <artifactId>javase</artifactId>
             <version>3.5.1</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+
+
 
 
     </dependencies>

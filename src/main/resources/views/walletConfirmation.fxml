@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.controllers.WalletConfirmationController"
+      alignment="CENTER" spacing="20" style="-fx-padding: 20;">
+    <Label text="Portefeuille Créé !" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
+    <Label fx:id="walletAddressLabel" text="Adresse : Chargement..." />
+    <Label fx:id="walletBalanceLabel" text="Solde : Chargement..." />
+    <Label fx:id="seedPhraseLabel" text="Phrase secrète : Chargement..." />
+    <Label fx:id="filePathLabel" text="Chemin du fichier : Chargement..." />
+    <TextArea fx:id="outputArea" editable="false" wrapText="true" style="-fx-min-height: 100px;" />
+    <Button text="Copier la phrase secrète" onAction="#copySeedPhrase" />
+
+    <Button text="Fermer" onAction="#closeAndRedirectToLogin" />
+    <Label fx:id="feedbackText" text="Feedback : Chargement..." style="-fx-text-fill: green;" />
+
+</VBox>

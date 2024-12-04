@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            xmlns="http://javafx.com/javafx"
+            fx:controller="org.example.controllers.WalletDashboardController"
+            stylesheets="@../css/styles.css">
+
+    <!-- Barre de menu en haut -->
+    <top>
+        <MenuBar>
+            <Menu text="Fichier">
+                <MenuItem text="Déconnexion" onAction="#logout" />
+                <MenuItem text="Quitter" onAction="#exitApp" />
+            </Menu>
+            <Menu text="Portefeuille">
+                <MenuItem text="Envoyer des fonds" onAction="#sendMoney" />
+                <MenuItem text="Voir les transactions" onAction="#viewTransactions" />
+            </Menu>
+        </MenuBar>
+    </top>
+
+    <!-- Contenu principal au centre -->
+    <center>
+        <VBox alignment="CENTER" spacing="20" styleClass="main-container">
+            <Label fx:id="balanceLabel" text="Solde : Chargement..." styleClass="header-label" />
+            <Button text="Envoyer des Bitcoins" onAction="#sendMoney" styleClass="primary-button" />
+            <Button text="Voir les transactions" onAction="#viewTransactions" styleClass="secondary-button" />
+        </VBox>
+    </center>
+
+    <!-- Barre d'état en bas -->
+    <bottom>
+        <Label text="Connecté en tant que : " fx:id="usernameLabel" />
+    </bottom>
+</BorderPane>

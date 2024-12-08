@@ -25,6 +25,9 @@
     <center>
         <VBox alignment="CENTER" spacing="20" styleClass="main-container">
             <Label fx:id="balanceLabel" text="Solde : Chargement..." styleClass="header-label" />
+            <Label fx:id="currentAddressLabel" text="Adresse de réception : Chargement..." styleClass="header-label" />
+            <Button text="Copier l'adresse" onAction="#copyAddress" styleClass="secondary-button" />
+
             <Button text="Envoyer des Bitcoins" onAction="#sendMoney" styleClass="primary-button" />
             <Button text="Voir les transactions" onAction="#viewTransactions" styleClass="secondary-button" />
         </VBox>

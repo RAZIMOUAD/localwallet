@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.example.controllers.TransactionsController"
+      alignment="CENTER" spacing="20" styleClass="main-container">
+    <Label text="Historique des Transactions" styleClass="header-label" />
+    <TableView fx:id="transactionsTable" styleClass="table">
+        <columns>
+            <TableColumn text="Date" fx:id="dateColumn" />
+            <TableColumn text="Montant" fx:id="amountColumn" />
+            <TableColumn text="Adresse de Destination" fx:id="addressColumn" />
+        </columns>
+    </TableView>
+    <Button text="Retour" onAction="#goBackToDashboard" styleClass="secondary-button" />
+</VBox>

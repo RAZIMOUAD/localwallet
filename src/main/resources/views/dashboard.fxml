@@ -1,45 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 
-<StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.controllers.WalletController"
-           styleClass="root" stylesheets="@../css/styles.css">
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane styleClass="root" stylesheets="@../css/styles.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="org.example.controllers.WalletController">
 
     <!-- Main Container -->
     <VBox alignment="CENTER" spacing="20" styleClass="main-container">
 
         <!-- Header -->
-        <Label text="Tableau de bord du portefeuille Bitcoin" styleClass="header-label" />
+        <Label styleClass="header-label" text="Tableau de bord du portefeuille Bitcoin" />
 
         <!-- Wallet Actions -->
         <VBox alignment="CENTER" spacing="15" styleClass="box">
             <TextField fx:id="walletFileField" promptText="Chemin du fichier portefeuille" styleClass="text-field" />
-            <Button text="Créer un portefeuille" onAction="#createWallet" styleClass="primary-button" />
-            <Button text="Charger un portefeuille" onAction="#loadWallet" styleClass="primary-button" />
+            <Button onAction="#createWallet" styleClass="primary-button" text="Créer un portefeuille" />
         </VBox>
         <VBox alignment="CENTER" spacing="15" styleClass="box">
-            <Label text="Détails du portefeuille créé :" styleClass="header-label" />
-            <Label fx:id="walletDetails" text="Aucun portefeuille créé pour l'instant." styleClass="feedback-label" />
+            <Label styleClass="header-label" text="Détails du portefeuille créé :" />
         </VBox>
 
         <!-- Seed Restoration -->
-        <VBox alignment="CENTER" spacing="15" styleClass="box">
-            <TextField fx:id="seedField" promptText="Phrase mnémonique pour restaurer" styleClass="text-field" />
-            <Button text="Restaurer un portefeuille" onAction="#restoreWallet" styleClass="primary-button" />
-        </VBox>
-
-        <!-- Address Section -->
-        <VBox alignment="CENTER" spacing="15" styleClass="box">
-            <Label text="Nouvelle adresse générée :" styleClass="feedback-label" />
-            <Label fx:id="generatedAddress" text="Aucune adresse générée pour l'instant" styleClass="feedback-label" />
-            <Button text="Générer une nouvelle adresse" onAction="#generateNewAddress" styleClass="primary-button" />
-        </VBox>
+        <VBox alignment="CENTER" spacing="15" styleClass="box" />
 
         <!-- Wallet Balance -->
-        <VBox alignment="CENTER" spacing="15" styleClass="box">
-            <Label text="Solde du portefeuille :" styleClass="header-label" />
-            <Label fx:id="balanceLabel" text="0 BTC" styleClass="header-label" />
-        </VBox>
+        <VBox alignment="CENTER" spacing="15" styleClass="box" />
 
         <!-- Feedback Label -->
         <Label fx:id="feedbackText" styleClass="feedback-label" />

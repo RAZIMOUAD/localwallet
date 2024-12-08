@@ -14,13 +14,13 @@ public class WalletController {
 
     public Label walletDetails;
     @FXML
-    private Label generatedAddress, feedbackText, balanceLabel;
+    private Label generatedAddress, feedbackText, balanceLabel,currentAddressLabel;
 
     @FXML
     private Button createWalletButton, loadWalletButton, restoreWalletButton, generateAddressButton;
 
     @FXML
-    private TextField seedField, walletFileField;
+    private TextField seedField, walletFileField,recipientAddressField, amountField;;
 
     @FXML
     private TextArea outputArea;
@@ -42,50 +42,50 @@ public class WalletController {
         try {
             String walletFilePath = walletFileField.getText();
             if (walletFilePath == null || walletFilePath.trim().isEmpty()) {
-                feedbackText.setText("Veuillez entrer un chemin de fichier valide.");
-                feedbackText.setStyle("-fx-text-fill: red;");
+                setFeedback("Veuillez entrer un chemin de fichier valide.", false);
                 return;
             }
-            // Get the logged-in user ID from the session
+
+            // Récupérer l'utilisateur connecté
             Integer userId = SessionManager.getLoggedInUserId();
             if (userId == null) {
-                feedbackText.setText("Erreur : Utilisateur non connecté.");
-                feedbackText.setStyle("-fx-text-fill: red;");
+                setFeedback("Erreur : Utilisateur non connecté.", false);
                 return;
             }
 
+            // Créer une nouvelle wallet
             walletService.createWallet(walletFilePath, userId);
 
-            // Generate wallet details
+            // Récupérer les détails de la wallet
             String seedPhrase = walletService.getSeedPhrase();
-            String address = walletService.getCurrentAddress();
-            String walletBalance = walletService.getWalletBalance();
-// Save wallet details to the database
-            walletService.saveWalletToDatabase(userId, seedPhrase, walletFilePath);
+            String currentAddress = walletService.getCurrentAddress();
+            double initialBalance = 0.05; // Solde initial
 
-            // Load confirmation view
+            // Enregistrer les détails de la wallet dans la base de données
+            walletService.saveWalletToDatabase(userId, seedPhrase, walletFilePath, currentAddress, initialBalance);
+
+            // Charger la vue de confirmation
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/walletConfirmation.fxml"));
             Stage confirmationStage = new Stage();
             confirmationStage.setTitle("Confirmation de création");
             confirmationStage.setScene(new Scene(loader.load()));
 
-            // Pass wallet details to the confirmation controller
+            // Passer les détails au contrôleur de confirmation
             WalletConfirmationController confirmationController = loader.getController();
-            confirmationController.setWalletDetails(address , walletBalance, seedPhrase, walletFilePath);
+            confirmationController.setWalletDetails(currentAddress, initialBalance, seedPhrase, walletFilePath);
 
-
-            // Show confirmation view
+            // Afficher la vue de confirmation
             confirmationStage.show();
 
-            // Update feedback
-            feedbackText.setText("Portefeuille créé avec succès !");
-            feedbackText.setStyle("-fx-text-fill: green;");
+            setFeedback("Portefeuille créé avec succès !", true);
+            balanceLabel.setText("Solde : " + initialBalance + " BTC");
+            currentAddressLabel.setText("Adresse : " + currentAddress);
 
         } catch (Exception e) {
-            feedbackText.setText("Erreur lors de la création du portefeuille : " + e.getMessage());
-            feedbackText.setStyle("-fx-text-fill: red;");
+            setFeedback("Erreur lors de la création du portefeuille : " + e.getMessage(), false);
         }
     }
+
     private int getCurrentUserId() {
         // Replace with actual logic to retrieve the logged-in user ID
         return 1; // Placeholder for testing
@@ -95,21 +95,48 @@ public class WalletController {
         try {
             String walletFilePath = walletFileField.getText();
             walletService.loadWallet(walletFilePath);
-            outputArea.setText("Wallet loaded successfully.\nBalance: " + walletService.getWalletBalance());
+            String currentAddress = walletService.getCurrentAddress();
+            double balance = walletService.getWalletBalanceByUserId(SessionManager.getLoggedInUserId());
+            outputArea.setText("Wallet chargée avec succès.\nAdresse : " + currentAddress + "\nSolde : " + balance + " BTC");
+            balanceLabel.setText("Solde : " + balance + " BTC");
+            currentAddressLabel.setText("Adresse : " + currentAddress);
         } catch (Exception e) {
-            outputArea.setText("Error loading wallet: " + e.getMessage());
+            setFeedback("Erreur lors du chargement du portefeuille : " + e.getMessage(), false);
         }
     }
+    @FXML
+    public void sendBitcoin() {
+        try {
+            Integer userId = SessionManager.getLoggedInUserId();
+            if (userId == null) {
+                setFeedback("Erreur : Utilisateur non connecté.", false);
+                return;
+            }
 
+            String recipientAddress = recipientAddressField.getText();
+            double amount = Double.parseDouble(amountField.getText());
+
+            if (walletService.sendTransaction(userId, recipientAddress, amount)) {
+                setFeedback("Transaction réussie !", true);
+                double updatedBalance = walletService.getWalletBalanceByUserId(userId);
+                balanceLabel.setText("Solde : " + updatedBalance + " BTC");
+            } else {
+                setFeedback("Erreur lors de la transaction.", false);
+            }
+        } catch (Exception e) {
+            setFeedback("Erreur lors de l'envoi : " + e.getMessage(), false);
+        }
+    }
     @FXML
     public void restoreWallet() {
         try {
             String seedPhrase = seedField.getText();
-            long creationTime = System.currentTimeMillis() / 1000; // Example creation time
+            long creationTime = System.currentTimeMillis() / 1000; // Exemple de timestamp
             walletService.restoreWalletFromSeed(seedPhrase, creationTime);
-            outputArea.setText("Wallet restored successfully.\nAddress: " + walletService.generateNewAddress());
+            String currentAddress = walletService.getCurrentAddress();
+            outputArea.setText("Wallet restaurée avec succès.\nAdresse : " + currentAddress);
         } catch (Exception e) {
-            outputArea.setText("Error restoring wallet: " + e.getMessage());
+            setFeedback("Erreur lors de la restauration du portefeuille : " + e.getMessage(), false);
         }
     }
 
@@ -117,9 +144,10 @@ public class WalletController {
     public void generateNewAddress() {
         try {
             String newAddress = walletService.generateNewAddress();
-            outputArea.setText("New address generated: " + newAddress);
+            setFeedback("Nouvelle adresse générée : " + newAddress, true);
+            currentAddressLabel.setText("Adresse : " + newAddress);
         } catch (Exception e) {
-            outputArea.setText("Error generating address: " + e.getMessage());
+            setFeedback("Erreur lors de la génération de l'adresse : " + e.getMessage(), false);
         }
     }
 
@@ -129,10 +157,10 @@ public class WalletController {
             balanceLabel.setText("Solde : " + walletService.getWalletBalance());
         } catch (Exception e) {
             try {
-                walletService.createWallet("wallet-test.wallet",getCurrentUserId());
-                balanceLabel.setText("Wallet created. Address: " + walletService.generateNewAddress());
+                walletService.createWallet("wallet-test.wallet", SessionManager.getLoggedInUserId());
+                balanceLabel.setText("Wallet créée. Adresse : " + walletService.generateNewAddress());
             } catch (Exception ex) {
-                feedbackText.setText("Erreur : " + ex.getMessage());
+                setFeedback("Erreur : " + ex.getMessage(), false);
             }
         }
     }

@@ -24,6 +24,7 @@ public class WalletConfirmationController {
     @FXML
     private Label seedPhraseLabel;
 
+
     @FXML
     private Label filePathLabel;
     @FXML
@@ -52,7 +53,7 @@ public class WalletConfirmationController {
     }
 
     // Method to set wallet details
-    public void setWalletDetails(String address, String balance, String seedPhrase, String filePath) {
+    public void setWalletDetails(String address, double balance, String seedPhrase, String filePath) {
         walletAddressLabel.setText("Adresse : " + address);
         walletBalanceLabel.setText("Solde : " + balance);
         seedPhraseLabel.setText("Phrase secrète : " + seedPhrase);

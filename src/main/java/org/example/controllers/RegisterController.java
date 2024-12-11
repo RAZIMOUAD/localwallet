@@ -3,6 +3,8 @@ package org.example.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -68,8 +70,24 @@ public class RegisterController {
 
     @FXML
     public void backToLogin(ActionEvent event) {
-        Main.loadScene("/views/login.fxml");
+        try {
+            // Load the login.fxml file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/login.fxml"));
+            Parent root = loader.load();
+
+            // Get the current stage from the event source (button)
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Set the new scene for the login page
+            stage.setScene(new Scene(root));
+            stage.setTitle("Login Page");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Error loading the login page: " + e.getMessage());
+        }
     }
+
 
     private void redirectToDashboard() {
         try {

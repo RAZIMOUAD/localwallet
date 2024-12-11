@@ -7,6 +7,8 @@ import javafx.scene.control.Label;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
+import org.example.Main;
+import org.example.services.AuthService;
 import org.example.services.WalletService;
 import org.example.utils.SessionManager;
 
@@ -86,6 +88,12 @@ public class WalletDashboardController {
 
     @FXML
     public void logout() {
+        // Appeler le service de déconnexion
+        AuthService authService = new AuthService();
+        authService.logout();
+
+        // Charger l'écran de connexion
+        Main.loadScene("/views/login.fxml");
         SessionManager.clearSession();
         System.out.println("Déconnexion réussie.");
         // Rediriger vers l'écran de connexion

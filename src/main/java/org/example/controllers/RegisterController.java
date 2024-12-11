@@ -29,6 +29,24 @@ public class RegisterController {
     private PasswordField confirmPasswordField;
 
     @FXML
+    private TextField emailField;
+
+    @FXML
+    private TextField phoneNumberField;
+
+    @FXML
+    private TextField countryField;
+
+    @FXML
+    private TextField dateOfBirthField;
+
+    @FXML
+    private TextField securityQuestionField;
+
+    @FXML
+    private TextField securityAnswerField;
+
+    @FXML
     private Label feedbackText;
 
     private final AuthService authService = new AuthService();
@@ -38,6 +56,13 @@ public class RegisterController {
         String username = usernameField.getText();
         String password = passwordField.getText();
         String confirmPassword = confirmPasswordField.getText();
+        String email = emailField.getText();
+        String phoneNumber = phoneNumberField.getText();
+        String country = countryField.getText();
+        String dateOfBirth = dateOfBirthField.getText();
+        String securityQuestion = securityQuestionField.getText();
+        String securityAnswer = securityAnswerField.getText();
+
 
         if (!password.equals(confirmPassword)) {
             feedbackText.setText("Passwords do not match.");
@@ -46,7 +71,7 @@ public class RegisterController {
         }
 
         // Register the user
-        if (authService.register(username, password)) {
+        if (authService.register(username, password, email, phoneNumber, country, dateOfBirth, securityQuestion, securityAnswer)) {
             // Retrieve the user ID
             int userId = authService.getUserIdByUsername(username);
             if (userId > 0) {

@@ -13,9 +13,16 @@
 
         <!-- Champs de formulaire -->
         <VBox alignment="CENTER" spacing="15">
-            <TextField fx:id="usernameField" promptText="Nom d'utilisateur" styleClass="text-field" />
-            <PasswordField fx:id="passwordField" promptText="Mot de passe" styleClass="password-field" />
-            <PasswordField fx:id="confirmPasswordField" promptText="Confirmer le mot de passe" styleClass="password-field" />
+            <TextField fx:id="usernameField" promptText="Username" />
+            <PasswordField fx:id="passwordField" promptText="Password" />
+            <PasswordField fx:id="confirmPasswordField" promptText="Confirm Password" />
+            <TextField fx:id="emailField" promptText="Email" />
+            <TextField fx:id="phoneNumberField" promptText="Phone Number" />
+            <TextField fx:id="countryField" promptText="Country" />
+            <TextField fx:id="dateOfBirthField" promptText="Date of Birth (YYYY-MM-DD)" />
+            <TextField fx:id="securityQuestionField" promptText="Security Question" />
+            <TextField fx:id="securityAnswerField" promptText="Security Answer" />
+
         </VBox>
 
         <!-- Message de feedback -->

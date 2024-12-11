@@ -17,14 +17,20 @@ public class AuthService {
      * @param password The plain-text password to hash and store.
      * @return True if registration was successful, false otherwise.
      */
-    public boolean register(String username, String password) {
-        String query = "INSERT INTO users (username, password_hash) VALUES (?, ?)";
+    public boolean register(String username, String password, String email, String phoneNumber, String country, String dateOfBirth, String securityQuestion, String securityAnswer) {
+        String query = "INSERT INTO users (username, password_hash, email, phone_number, country, date_of_birth, security_question, security_answer) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection connection = DatabaseUtils.getConnection();
              PreparedStatement stmt = connection.prepareStatement(query)) {
 
             String hashedPassword = hashPassword(password); // Hash the password before storing
             stmt.setString(1, username);
             stmt.setString(2, hashedPassword);
+            stmt.setString(3, email);
+            stmt.setString(4, phoneNumber);
+            stmt.setString(5, country);
+            stmt.setString(6, dateOfBirth);
+            stmt.setString(7, securityQuestion);
+            stmt.setString(8, securityAnswer);
             stmt.executeUpdate();
             return true;
         } catch (SQLException e) {

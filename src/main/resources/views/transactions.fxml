@@ -14,5 +14,5 @@
             <TableColumn text="Adresse de Destination" fx:id="addressColumn" />
         </columns>
     </TableView>
-    <Button text="Retour" onAction="#goBackToDashboard" styleClass="secondary-button" />
+    <Button text="Retour" onAction="#goBackToWalletDashboard" styleClass="secondary-button" />
 </VBox>

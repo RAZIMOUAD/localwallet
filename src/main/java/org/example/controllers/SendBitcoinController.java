@@ -1,6 +1,11 @@
 package org.example.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -8,6 +13,7 @@ import javafx.stage.Stage;
 import org.example.services.WalletService;
 import org.example.utils.SessionManager;
 
+import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 
@@ -113,10 +119,37 @@ public class SendBitcoinController {
         }
     }
 
-    @FXML
+    /*@FXML
     public void goBackToDashboard() {
         // Retour à la vue principale
         Stage stage = (Stage) feedbackLabel.getScene().getWindow();
         stage.close();
+    }*/
+    @FXML
+    public void goBackToWalletDashboard(ActionEvent event) {
+        try {
+            // Load the Wallet_Dashboard.fxml file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/Wallet_Dashboard.fxml"));
+            Parent root = loader.load();
+
+            // Get the current stage from the event source (button)
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Set the new scene for the Wallet Dashboard
+            currentStage.setScene(new Scene(root));
+            currentStage.setTitle("Wallet Dashboard");
+
+            // Show the updated stage (this replaces the current window)
+            currentStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Error loading the Wallet Dashboard page: " + e.getMessage());
+        }
     }
+
+
 }
+
+
+
+

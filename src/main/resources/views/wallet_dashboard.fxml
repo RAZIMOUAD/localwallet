@@ -10,14 +10,11 @@
     <!-- Barre de menu en haut -->
     <top>
         <MenuBar>
-            <Menu text="Fichier">
+            <Menu text="Options">
                 <MenuItem text="Déconnexion" onAction="#logout" />
                 <MenuItem text="Quitter" onAction="#exitApp" />
             </Menu>
-            <Menu text="Portefeuille">
-                <MenuItem text="Envoyer des fonds" onAction="#sendMoney" />
-                <MenuItem text="Voir les transactions" onAction="#viewTransactions" />
-            </Menu>
+
         </MenuBar>
     </top>
 

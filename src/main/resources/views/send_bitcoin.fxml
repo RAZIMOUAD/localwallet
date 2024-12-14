@@ -1,26 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml"
-            xmlns="http://javafx.com/javafx"
-            fx:controller="org.example.controllers.SendBitcoinController"
-            stylesheets="@../css/styles.css">
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.SendBitcoinController">
 
     <center>
         <VBox alignment="CENTER" spacing="20" styleClass="main-container">
 
-            <Label text="Envoyer des Bitcoins" styleClass="header-label" />
+            <Label styleClass="header-label" text="Envoyer des Bitcoins" />
 
             <TextField fx:id="recipientAddressField" promptText="Adresse du destinataire" styleClass="text-field" />
             <TextField fx:id="amountField" promptText="Montant (en BTC)" styleClass="text-field" />
 
-            <Button text="Envoyer" onAction="#sendBitcoin" styleClass="primary-button" />
+            <Button onAction="#sendBitcoin" styleClass="primary-button" text="Envoyer" />
             <Label fx:id="feedbackLabel" styleClass="feedback-label" />
-
-            <!-- Zone de logs -->
-            <TextArea fx:id="logArea" editable="false" wrapText="true" prefHeight="150" prefWidth="400" />
-            <Button text="Retour" onAction="#goBackToDashboard" styleClass="secondary-button" />
+            <Button onAction="#goBackToWalletDashboard" styleClass="secondary-button" text="Retour" />
         </VBox>
     </center>
 </BorderPane>

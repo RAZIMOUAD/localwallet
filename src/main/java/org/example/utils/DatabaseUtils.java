@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class DatabaseUtils {
     private static final String URL = "jdbc:mysql://localhost:3306/bitcoin_wallet";
     private static final String USER = "root";
-    private static final String PASSWORD = "Khalil@2001";
+    private static final String PASSWORD = "anasl9ray";
 
     static {
         try {

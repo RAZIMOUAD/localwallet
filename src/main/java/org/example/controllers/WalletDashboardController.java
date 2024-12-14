@@ -1,7 +1,10 @@
 package org.example.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.Clipboard;
@@ -60,29 +63,47 @@ public class WalletDashboardController {
         }
     }
     @FXML
-    public void sendMoney() {
+    public void sendMoney(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/send_bitcoin.fxml"));
-            Stage sendBitcoinStage = new Stage();
-            sendBitcoinStage.setTitle("Envoyer des Bitcoins");
-            sendBitcoinStage.setScene(new Scene(loader.load()));
-            sendBitcoinStage.show();
-        } catch (Exception e) {
-            System.err.println("Erreur lors du chargement de la vue d'envoi : " + e.getMessage());
+            // Load the Send_Bitcoin.fxml file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/send_Bitcoin.fxml"));
+            Parent root = loader.load();
+
+            // Get the current stage from the event source (button)
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Set the new scene for Send_Bitcoin
+            currentStage.setScene(new Scene(root));
+            currentStage.setTitle("Send Bitcoin");
+
+            // Show the updated stage
+            currentStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Error loading the Send Bitcoin page: " + e.getMessage());
         }
     }
 
+
     @FXML
-    public void viewTransactions() {
+    public void viewTransactions(ActionEvent event) {
         try {
+            // Load the Send_Bitcoin.fxml file
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/transactions.fxml"));
-            Scene scene = new Scene(loader.load());
-            Stage stage = new Stage();
-            stage.setTitle("Historique des Transactions");
-            stage.setScene(scene);
-            stage.show();
+            Parent root = loader.load();
+
+            // Get the current stage from the event source (button)
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Set the new scene for Send_Bitcoin
+            currentStage.setScene(new Scene(root));
+            currentStage.setTitle("Send Bitcoin");
+
+            // Show the updated stage
+            currentStage.show();
         } catch (IOException e) {
             e.printStackTrace();
+            System.err.println("Error loading the Send Bitcoin page: " + e.getMessage());
         }
     }
 
@@ -102,5 +123,21 @@ public class WalletDashboardController {
     @FXML
     public void exitApp() {
         System.exit(0);
+    }
+    @FXML
+    public void refreshBalance() {
+        try {
+            // Get the logged-in user ID
+            int userId = SessionManager.getLoggedInUserId();
+            if (userId != 0) {
+                double newBalance = walletService.getWalletBalanceByUserId(userId);
+                balanceLabel.setText("Solde : " + String.format("%.8f BTC", newBalance));
+            } else {
+                balanceLabel.setText("Erreur : Utilisateur non connecté.");
+            }
+        } catch (Exception e) {
+            balanceLabel.setText("Erreur lors de la récupération du solde.");
+            e.printStackTrace();
+        }
     }
 }

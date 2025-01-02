@@ -70,13 +70,10 @@ public class WalletService {
         double initialBalance = 0.05; // Exemple : 0.05 BTC
         // Encrypt the seed phrase
         String encryptedSeedPhrase = EncryptionUtils.encrypt(seedPhrase);
-
         // Save the wallet to a file
         File walletFile = new File(walletFilePath);
         wallet.saveToFile(walletFile);
-
         System.out.println("Wallet created at: " + walletFile.getAbsolutePath());
-
         // Save the wallet details to the database
         saveWalletToDatabase(userId, encryptedSeedPhrase, walletFilePath, currentAddress, initialBalance);
         //saveWalletToDatabase(userId, encryptedSeedPhrase, walletFilePath);

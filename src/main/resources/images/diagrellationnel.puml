@@ -1,0 +1,35 @@
+@startuml
+
+entity "Users" as users {
+  + id : INT [PK]
+  --
+  username : VARCHAR(255)
+  password : VARCHAR(255)
+  created_at : TIMESTAMP
+}
+
+entity "Wallets" as wallets {
+  + id : INT [PK]
+  --
+  user_id : INT [FK]
+  file_path : VARCHAR(255)
+  seed_phrase : TEXT
+  balance : DOUBLE
+  current_address : VARCHAR(255)
+  created_at : TIMESTAMP
+}
+
+entity "Transactions" as transactions {
+  + id : INT [PK]
+  --
+  sender_wallet_id : INT [FK]
+  receiver_wallet_address : VARCHAR(255)
+  amount : DOUBLE
+  type : ENUM('SEND', 'RECEIVE')
+  created_at : TIMESTAMP
+}
+
+users ||--o{ wallets : "has"
+wallets ||--o{ transactions : "performs"
+
+@enduml

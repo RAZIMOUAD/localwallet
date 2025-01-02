@@ -8,7 +8,7 @@
             <Label text="Envoyer des fonds" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
             <TextField fx:id="recipientAddressField" promptText="Adresse du destinataire" />
             <TextField fx:id="amountField" promptText="Montant en BTC" />
-            <Button text="Envoyer" onAction="#sendMoney" />
+            <Button text="Envoyer" onAction="#sendBitcoin" />
             <Label fx:id="statusLabel" textFill="green" visible="false" />
         </VBox>
     </center>

@@ -1,0 +1,71 @@
+@startuml
+package "org.example" {
+    package config {
+        class AppConfig
+    }
+
+    package controllers {
+        class AuthController
+        class MainController
+        class RegisterController
+        class SendBitcoinController
+        class TransactionsController
+        class WalletConfirmationController
+        class WalletController
+        class WalletDashboardController
+    }
+
+    package models {
+        class User {
+            + id : int
+            + username : String
+            + password : String
+        }
+        class Wallet {
+            + id : int
+            + user_id : int
+            + file_path : String
+            + balance : double
+        }
+        class Transaction {
+            + id : int
+            + sender_wallet_id : int
+            + receiver_wallet_address : String
+            + amount : double
+        }
+    }
+
+    package services {
+        class AuthService
+        class BitcoinService
+        class LightningService
+        class TransactionService
+        class WalletService
+    }
+
+    package utils {
+        class CryptoUtils
+        class DatabaseUtils
+        class EncryptionUtils
+        class QRCodeUtils
+        class SessionManager
+        class TestConnection
+    }
+
+
+    AuthController --> AuthService : "Utilise"
+    RegisterController --> AuthService : "Utilise"
+    WalletDashboardController --> WalletService : "Gère"
+    WalletService --> DatabaseUtils : "Accède"
+    BitcoinService --> TransactionService : "Interagit"
+    WalletService --> Wallet : "Manipule"
+    TransactionService --> Transaction : "Manipule"
+
+    DatabaseUtils --> TestConnection : "Valide Connexion"
+    QRCodeUtils --> Wallet : "Génère QR"
+    EncryptionUtils --> CryptoUtils : "Chiffre"
+
+    User --> Wallet : "Possède"
+    Wallet --> Transaction : "Effectue"
+}
+@enduml

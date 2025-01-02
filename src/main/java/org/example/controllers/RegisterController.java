@@ -69,7 +69,6 @@ public class RegisterController {
             feedbackText.setStyle("-fx-fill: red;");
             return;
         }
-
         // Register the user
         if (authService.register(username, password, email, phoneNumber, country, dateOfBirth, securityQuestion, securityAnswer)) {
             // Retrieve the user ID
@@ -80,7 +79,6 @@ public class RegisterController {
 
                 feedbackText.setText("Registration successful!");
                 feedbackText.setStyle("-fx-fill: green;");
-
                 // Redirect to dashboard.fxml
                 redirectToDashboard();
             } else {

@@ -6,7 +6,6 @@
             xmlns="http://javafx.com/javafx"
             fx:controller="org.example.controllers.WalletDashboardController"
             stylesheets="@../css/styles.css">
-
     <!-- Barre de menu en haut -->
     <top>
         <MenuBar>
@@ -20,19 +19,16 @@
             </Menu>
         </MenuBar>
     </top>
-
     <!-- Contenu principal au centre -->
     <center>
         <VBox alignment="CENTER" spacing="20" styleClass="main-container">
             <Label fx:id="balanceLabel" text="Solde : Chargement..." styleClass="header-label" />
             <Label fx:id="currentAddressLabel" text="Adresse de réception : Chargement..." styleClass="header-label" />
             <Button text="Copier l'adresse" onAction="#copyAddress" styleClass="secondary-button" />
-
             <Button text="Envoyer des Bitcoins" onAction="#sendMoney" styleClass="primary-button" />
             <Button text="Voir les transactions" onAction="#viewTransactions" styleClass="secondary-button" />
         </VBox>
     </center>
-
     <!-- Barre d'état en bas -->
     <bottom>
         <Label text="Connecté en tant que : " fx:id="usernameLabel" />

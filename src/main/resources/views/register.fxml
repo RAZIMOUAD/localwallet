@@ -4,13 +4,10 @@
 
 <StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.controllers.RegisterController"
            styleClass="root">
-
     <!-- Conteneur principal -->
     <VBox alignment="CENTER" spacing="20" styleClass="main-container">
-
         <!-- En-tête -->
         <Label text="Créer un compte" styleClass="header-label" />
-
         <!-- Champs de formulaire -->
         <VBox alignment="CENTER" spacing="15">
             <TextField fx:id="usernameField" promptText="Username" />
@@ -22,18 +19,13 @@
             <TextField fx:id="dateOfBirthField" promptText="Date of Birth (YYYY-MM-DD)" />
             <TextField fx:id="securityQuestionField" promptText="Security Question" />
             <TextField fx:id="securityAnswerField" promptText="Security Answer" />
-
         </VBox>
-
         <!-- Message de feedback -->
         <Label fx:id="feedbackText" styleClass="feedback-label" />
-
         <!-- Boutons d'action -->
         <HBox alignment="CENTER" spacing="20">
             <Button text="S'inscrire" onAction="#register" styleClass="primary-button" />
             <Button text="Retour" onAction="#backToLogin" styleClass="secondary-button" />
         </HBox>
-
     </VBox>
-
 </StackPane>

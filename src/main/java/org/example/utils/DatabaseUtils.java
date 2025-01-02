@@ -5,9 +5,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseUtils {
-    private static final String URL = "jdbc:mysql://localhost:3306/bitcoin_wallet";
-    private static final String USER = "root";
-    private static final String PASSWORD = "Khalil@2001";
+    private static final String URL = "jdbc:mysql://localhost:3306/localwallet";
+    private static final String USER = "java_user";
+    private static final String PASSWORD = "9rayaonlyFORjava";
 
     static {
         try {
